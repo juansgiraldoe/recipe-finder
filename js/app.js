@@ -32,6 +32,13 @@ function iniciarApp() {
   };
 
   function mostrarPlatos(res = []) {
+    limpiarHtml(resultado);
+
+    const headingResultados = document.createElement('H2');
+    headingResultados.classList.add('text-center', 'my-5', 'text-black');
+    headingResultados.textContent = res.length ? 'Resultados.' : 'No hay resutados.';
+    resultado.appendChild(headingResultados);
+
     res.forEach(plato => {
       const { idMeal, strMeal, strMealThumb } = plato;
 
@@ -67,9 +74,13 @@ function iniciarApp() {
       contenedor.appendChild(card);
 
       resultado.appendChild(contenedor);
-
-
     });
   };
+
+  function limpiarHtml(selector) {
+    while (selector.firstChild) {
+      selector.removeChild(selector.firstChild);
+    }
+  }
 };
 document.addEventListener('DOMContentLoaded', iniciarApp);
