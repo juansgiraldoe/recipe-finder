@@ -112,10 +112,28 @@ function iniciarApp() {
         const ingredienteLi = document.createElement('LI');
         ingredienteLi.classList.add('list-group-item');
         ingredienteLi.textContent = `${ingrediente} - ${cantidad}`;
-        listGroup.appendChild(ingredienteLi)
+        listGroup.appendChild(ingredienteLi);
       };
     };
-    modalBody.appendChild(listGroup)
+    modalBody.appendChild(listGroup);
+
+    //Crear botones.
+    const modalFooter = document.querySelector('.modal-footer');
+    limpiarHtml(modalFooter)
+    
+    const btnFav = document.createElement('BUTTON');
+    btnFav.classList.add('btn', 'btn-danger', 'col');
+    btnFav.textContent = 'Guardar favorito';
+    modalFooter.appendChild(btnFav);
+    
+    const btnCerrar = document.createElement('BUTTON');
+    btnCerrar.classList.add('btn', 'btn-secondary', 'col');
+    btnCerrar.textContent = 'Cerrar';
+    btnCerrar.onclick = function () {
+      modal.hide();
+    }
+    modalFooter.appendChild(btnCerrar);
+    
     //Mostrar modal.
     modal.show();
   }
