@@ -125,6 +125,19 @@ function iniciarApp() {
     btnFav.classList.add('btn', 'btn-danger', 'col');
     btnFav.textContent = 'Guardar favorito';
     modalFooter.appendChild(btnFav);
+
+    //Localstorage.
+    btnFav.onclick = function () {
+
+      if (existeStorage(idMeal)) {
+        return;
+      };
+      agregarFavorito({
+        id: idMeal,
+        title: strMeal,
+        img: strMealThumb,
+      });
+    };
     
     const btnCerrar = document.createElement('BUTTON');
     btnCerrar.classList.add('btn', 'btn-secondary', 'col');
@@ -136,7 +149,17 @@ function iniciarApp() {
     
     //Mostrar modal.
     modal.show();
-  }
+  };
+
+  function agregarFavorito(receta){
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
+    localStorage.setItem('favoritos', JSON.stringify([...favoritos, receta]));
+  };
+  
+  function existeStorage(id) {
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
+    return favoritos.some(favorito => favorito.id === id)
+  };
 
   function limpiarHtml(selector) {
     while (selector.firstChild) {
